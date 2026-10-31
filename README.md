@@ -1,4 +1,4 @@
-# CORE5 Biomedical Engineering
+# CORE5 Biomedical Engineering Design
 
 Public website, admin dashboard and Supabase backend for the CORE5 student team.
 

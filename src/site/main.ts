@@ -17,7 +17,7 @@ function mount(d: SiteData) {
   $('#nv').innerHTML = NAV.map(([id, l]) => `<a class="nl" href="#${id}">${l}</a>`).join('') + '<a class="btn" href="#process">Explore Our Journey</a>';
   $('#main').innerHTML = NAV.map(([id]) => `<div data-v="${id}" hidden>${views[id](d)}</div>`).join('');
   const c = d.s.contact;
-  $('#ft').innerHTML = `<div class="w"><div class="fg"><div><a class="logo" href="#home"><b>CORE<span>5</span></b></a><p style="margin:10px 0 4px">Biomedical Engineering</p><p>Innovating Healthcare. Engineering Possibilities.</p></div><div><h4>Navigate</h4>${NAV.slice(0, 5).map(([id, l]) => `<a href="#${id}">${l}</a>`).join('')}</div><div><h4>Research</h4><a href="#research">Research library</a><a href="#needs">Needs Assessment</a><a href="#problem">The Problem</a></div><div><h4>Contact</h4><p>${E(str(c, 'email')) || 'Team email to be added'}</p><p>${E(str(d.s.about, 'institution') || str(c, 'institution')) || 'Institution to be added'}</p>${lines(str(c, 'socials')).map((l) => l.split('|').map((x) => x.trim())).filter((p) => safeUrl(p[1] || '')).map((p) => `<a href="${E(p[1])}" target="_blank" rel="noopener">${E(p[0])}</a>`).join('')}<a href="#contact">Contact form</a></div></div><p class="cp">© ${new Date().getFullYear()} CORE5. Academic project for Biomedical Engineering. Not a commercial medical device.</p></div>`;
+  $('#ft').innerHTML = `<div class="w"><div class="fg"><div><a class="logo" href="#home"><b>CORE<span>5</span></b></a><p style="margin:10px 0 4px">Biomedical Engineering Design</p><p>Innovating Healthcare. Engineering Possibilities.</p></div><div><h4>Navigate</h4>${NAV.slice(0, 5).map(([id, l]) => `<a href="#${id}">${l}</a>`).join('')}</div><div><h4>Research</h4><a href="#research">Research library</a><a href="#needs">Needs Assessment</a><a href="#problem">The Problem</a></div><div><h4>Contact</h4><p>${E(str(c, 'email')) || 'Team email to be added'}</p><p>${E(str(d.s.about, 'institution') || str(c, 'institution')) || 'Institution to be added'}</p>${lines(str(c, 'socials')).map((l) => l.split('|').map((x) => x.trim())).filter((p) => safeUrl(p[1] || '')).map((p) => `<a href="${E(p[1])}" target="_blank" rel="noopener">${E(p[0])}</a>`).join('')}<a href="#contact">Contact form</a></div></div><p class="cp">© ${new Date().getFullYear()} CORE5. Academic project for Biomedical Engineering Design. Not a commercial medical device.</p></div>`;
   if (!d.live) $('#bn').innerHTML = '<div class="banner">Preview mode: the database is not connected, so sample content is shown.</div>';
 }
 
@@ -26,7 +26,7 @@ function route() {
   const id = NAV.some((n) => n[0] === h) ? h : 'home';
   $$('[data-v]').forEach((s) => (s.hidden = s.dataset.v !== id));
   $$<HTMLAnchorElement>('.nl').forEach((a) => a.classList.toggle('on', a.hash === '#' + id));
-  document.title = (id === 'home' ? '' : NAV.find((n) => n[0] === id)![1] + ' · ') + 'CORE5 Biomedical Engineering';
+  document.title = (id === 'home' ? '' : NAV.find((n) => n[0] === id)![1] + ' · ') + 'CORE5 Biomedical Engineering Design';
   $('#nv').classList.remove('open');
   $('#mb').setAttribute('aria-expanded', 'false');
   scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
@@ -141,8 +141,25 @@ function contactForm() {
   });
 }
 
+function themeToggle() {
+  const root = document.documentElement, btn = $('#tt');
+  const apply = (dark: boolean) => {
+    root.dataset.theme = dark ? 'dark' : 'light';
+    const label = dark ? 'Switch to light mode' : 'Switch to dark mode';
+    btn.setAttribute('aria-label', label);
+    btn.title = label;
+  };
+  apply(root.dataset.theme === 'dark'); // the head script already restored the saved choice
+  btn.onclick = () => {
+    const dark = root.dataset.theme !== 'dark';
+    apply(dark);
+    try { localStorage.setItem('core5-theme', dark ? 'dark' : 'light'); } catch { /* storage blocked: the choice lasts for this visit only */ }
+  };
+}
+
 async function init() {
   const hide = () => $('#ld').classList.add('h');
+  themeToggle();
   const fail = setTimeout(hide, 6000); // never leave the loader up if the network stalls
   const d = await loadSite();
   mount(d);

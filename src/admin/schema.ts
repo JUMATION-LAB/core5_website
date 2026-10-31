@@ -20,7 +20,7 @@ export const SETTINGS: SettingDoc[] = [
     t('hero_title', 'Hero heading'), a('hero_text', 'Hero supporting text'),
     { k: 'hero_image', label: 'Hero photograph', type: 'file', bucket: 'public-media', help: 'JPG, PNG, WebP or AVIF, up to 5 MB. Use a real laboratory or student-work photo.' },
     t('featured_title', 'Featured section heading'), a('featured_text', 'Featured section text'),
-    ...[1, 2, 3, 4].flatMap((i) => [n(`stat${i}_value`, `Statistic ${i}: number`), t(`stat${i}_label`, `Statistic ${i}: label`)]),
+    ...[1, 2, 3, 4 , 5].flatMap((i) => [n(`stat${i}_value`, `Statistic ${i}: number`), t(`stat${i}_label`, `Statistic ${i}: label`)]),
   ] },
   { key: 'problem', title: 'The problem', note: 'Only enter statements you can support with a reference.', fields: [
     a('background', 'Background of the problem'), a('why_matters', 'Why it matters'), a('where_occurs', 'Where it occurs'),

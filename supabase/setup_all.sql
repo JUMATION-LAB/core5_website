@@ -1,4 +1,4 @@
--- CORE5 Biomedical Engineering: database schema
+-- CORE5 Biomedical Engineering Design: database schema
 -- Order: 001 schema, 002 security, 003 storage, 004 seed.
 
 -- Who may edit content. Rows are added by hand in the SQL editor (see README).
