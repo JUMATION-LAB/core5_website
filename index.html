@@ -5,12 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>CORE5 Biomedical Engineering Design</title>
   <meta name="description" content="CORE5 is a five-member student team documenting the Biodesign process, from healthcare needs to early concepts, with a focus on Uganda and the wider African healthcare environment.">
+  <link rel="canonical" href="https://core5biomedical.netlify.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CORE5">
+  <meta property="og:url" content="https://core5biomedical.netlify.app/">
   <meta property="og:title" content="CORE5 Biomedical Engineering Design">
   <meta property="og:description" content="Innovating Healthcare. Engineering Possibilities.">
   <meta name="theme-color" content="#DB2777">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <script>document.documentElement.className = 'js'; try { document.documentElement.dataset.theme = localStorage.getItem('core5-theme') === 'dark' ? 'dark' : 'light' } catch (e) { document.documentElement.dataset.theme = 'light' }</script>
+  <script>
+    document.documentElement.className = 'js';
+    try { document.documentElement.dataset.theme = localStorage.getItem('core5-theme') === 'dark' ? 'dark' : 'light' } catch (e) { document.documentElement.dataset.theme = 'light' }
+    // Safety net: if the app script never loads, reveal the plain page after 8 seconds instead of staying on the loader.
+    setTimeout(function () { var l = document.getElementById('ld'); if (l) l.classList.add('h') }, 8000);
+  </script>
+  <style>
+    /* Critical CSS, inline so the loading screen paints first and nothing unstyled flashes before it. */
+    .js .ld { position: fixed; inset: 0; z-index: 99; display: flex; align-items: center; justify-content: center; background: #fff; color: #0F172A; font: 900 44px/1 Roboto, system-ui, sans-serif; transition: opacity .4s, visibility .4s }
+    .js .ld span { color: #DB2777 }
+    html[data-theme=dark] .ld { background: #0B1220; color: #F1F5F9 }
+    .js .ld.h { opacity: 0; visibility: hidden }
+    .js .ld:not(.h) ~ * { visibility: hidden }
+    .js body:has(.ld:not(.h)) { overflow: hidden }
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[
+    {"@type":"WebSite","@id":"https://core5biomedical.netlify.app/#website","url":"https://core5biomedical.netlify.app/","name":"CORE5 Biomedical Engineering Design","inLanguage":"en"},
+    {"@type":"Organization","@id":"https://core5biomedical.netlify.app/#org","name":"CORE5","url":"https://core5biomedical.netlify.app/","slogan":"Innovating Healthcare. Engineering Possibilities.","description":"CORE5 is a five-member student team documenting the Biodesign process, from healthcare needs to early concepts, with a focus on Uganda and the wider African healthcare environment."}
+  ]}
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -18,7 +42,7 @@
 <body>
   <div class="ld" id="ld" aria-hidden="true"><b>CORE<span>5</span></b></div>
   <div id="bn"></div>
-  <header id="hd"><div class=" hb" style="max-width:100%; margin-left: 10px;margin-right: 10px;">
+  <header id="hd"><div class="w hb">
     <a class="logo" href="#home" aria-label="CORE5 home"><b>CORE<span>5</span></b><small>Biomedical Engineering Design</small></a>
     <div class="hr">
       <nav id="nv" aria-label="Main"></nav>
@@ -29,10 +53,18 @@
       <button class="mb" id="mb" aria-expanded="false" aria-controls="nv" aria-label="Toggle menu"><i></i><i></i><i></i></button>
     </div>
   </div></header>
-  <main id="main"></main>
+  <!-- Fixed text that search engines can read without running JavaScript. The app replaces it once it loads. -->
+  <main id="main">
+    <section class="pg"><div class="w">
+      <span class="lb">BIOMEDICAL DESIGN I</span>
+      <h1>CORE5: Reimagining Healthcare Through Biomedical Innovation.</h1>
+      <p class="lead">CORE5 is a team of five biomedical design students exploring unmet healthcare needs, researching challenges and developing innovative approaches to improve healthcare, with a focus on Uganda and the wider African healthcare environment.</p>
+      <p class="lead">This site documents our Biodesign process: The Problem, Needs Assessment, Our Innovation, Design Process, Research, Our Team and Contact.</p>
+    </div></section>
+  </main>
   <footer id="ft"></footer>
   <dialog id="dg"><button class="x" aria-label="Close">×</button><div id="dc"></div></dialog>
-  <noscript><p style="padding:24px">This site needs JavaScript to load its content.</p></noscript>
+  <noscript><p style="padding:24px">The full interactive site needs JavaScript to load its content.</p></noscript>
   <script type="module" src="/src/site/main.ts"></script>
 </body>
 </html>

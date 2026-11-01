@@ -1,2 +1,4 @@
 User-agent: *
 Disallow: /admin/
+
+Sitemap: https://core5biomedical.netlify.app/sitemap.xml
